@@ -1,0 +1,10 @@
+version: '3'
+services:
+  dhparam:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dhparam
+    container_name: dhparam
+    volumes:
+      - /etc/ssl/certs:/etc/ssl/certs
