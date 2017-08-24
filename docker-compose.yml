@@ -8,3 +8,13 @@ services:
     container_name: dhparam
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    ports:
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/log/letsencrypt:/var/log/letsencrypt
+    depends_on:
+      - dhparam
