@@ -1,4 +1,4 @@
-# dfparam
+# dhparam
 生成Diffie-Hellman parameter
 
 ~~~bash
