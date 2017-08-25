@@ -4,6 +4,11 @@
 
 ~~~bash
 docker-compose run --service-ports certbot certonly --standalone -d zp25.ninja -d www.zp25.ninja
+
+# 查看状态
+docker-compose ps
+# 若State为Exit 0，清理容器
+docker-compose rm
 ~~~
 导出dhparam.pem到/etc/ssl/certs，导出证书到/etc/letsencrypt/zp25.ninja/live
 
