@@ -16,5 +16,12 @@ services:
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/log/letsencrypt:/var/log/letsencrypt
+      - /etc/ssl/certs:/etc/ssl/certs:ro
+      - ./wait-for-dhparam.py:/tmp/wait-for-dhparam.py
     depends_on:
       - dhparam
+    entrypoint: ['python']
+    command: ['/tmp/wait-for-dhparam.py', 'certbot', 'certonly', '--standalone',
+      '-d', 'zp25.ninja',
+      '-d', 'www.zp25.ninja'
+    ]
