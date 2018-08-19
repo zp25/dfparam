@@ -4,6 +4,9 @@
 
 ~~~bash
 docker-compose run --service-ports certbot
+# or
+docker-compose run --service-ports certbot \
+    certonly --standalone -d zp25.ninja -d www.zp25.ninja
 
 # 查看状态
 docker-compose ps

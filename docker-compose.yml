@@ -20,8 +20,8 @@ services:
       - ./wait-for-dhparam.py:/tmp/wait-for-dhparam.py
     depends_on:
       - dhparam
-    entrypoint: ['python']
-    command: ['/tmp/wait-for-dhparam.py', 'certbot', 'certonly', '--standalone',
+    entrypoint: ['python', '/tmp/wait-for-dhparam.py', 'certbot']
+    command: ['certonly', '--standalone',
       '-d', 'zp25.ninja',
       '-d', 'www.zp25.ninja'
     ]
