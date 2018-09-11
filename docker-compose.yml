@@ -25,5 +25,6 @@ services:
     entrypoint: ['python', '/tmp/wait-for-dhparam.py', 'certbot']
     command: ['certonly', '--standalone',
       '-d', 'zp25.ninja',
-      '-d', 'www.zp25.ninja'
+      '-d', 'www.zp25.ninja',
+      '-d', 'home.zp25.ninja'
     ]
