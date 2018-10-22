@@ -1,30 +1,45 @@
-version: '3'
+version: "3.5"
 services:
   dhparam:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-dhparam
     image: dhparam
     container_name: dhparam
     volumes:
-      - /etc/ssl/certs:/etc/ssl/certs
+      - type: volume
+        source: dhparam
+        target: /etc/ssl/certs
 
   certbot:
-    image: certbot/certbot
-    container_name: certbot
+    build:
+      context: .
+      dockerfile: Dockerfile-certs
+    image: certs
+    container_name: certs
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-      - /var/log/letsencrypt:/var/log/letsencrypt
-      - /etc/ssl/certs:/etc/ssl/certs:ro
-      - ./wait-for-dhparam.py:/tmp/wait-for-dhparam.py
+      - type: volume
+        source: dhparam
+        target: /etc/ssl/certs
+        read_only: true
+      - type: volume
+        source: letsencrypt
+        target: /etc/letsencrypt
+      - type: volume
+        source: log
+        target: /var/lib/letsencrypt
     depends_on:
       - dhparam
-    entrypoint: ['python', '/tmp/wait-for-dhparam.py', 'certbot']
-    command: ['certonly', '--standalone',
-      '-d', 'zp25.ninja',
-      '-d', 'www.zp25.ninja',
-      '-d', 'home.zp25.ninja'
+    command: ["certonly", "--standalone",
+      "-d", "zp25.ninja",
+      "-d", "www.zp25.ninja",
+      "-d", "home.zp25.ninja"
     ]
+
+volumes:
+  dhparam:
+  letsencrypt:
+  log:
