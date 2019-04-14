@@ -1,9 +1,13 @@
 FROM alpine:3.9
 
 VOLUME /etc/ssl/certs
+WORKDIR /etc/ssl/certs
 
-RUN apk update \
+ENV APK_MIRROR="https://mirrors.tuna.tsinghua.edu.cn/alpine/"
+
+RUN echo -e "${APK_MIRROR}v3.9/main\n${APK_MIRROR}v3.9/community\n" > /etc/apk/repositories \
+    && apk update \
     && apk add --no-cache openssl
 
-ENTRYPOINT ["openssl", "dhparam", "-out", "/etc/ssl/certs/dhparam.pem"]
-CMD ["2048"]
+CMD openssl dhparam -out ./dhparam.tmp.pem 2048 \
+  && mv -f ./dhparam.tmp.pem ./dhparam.pem
