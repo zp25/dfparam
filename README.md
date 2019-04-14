@@ -57,6 +57,15 @@ docker cp [certsContainer]:/etc/letsencrypt /local/path/to/letsencrypt
 
 导出证书
 
+## expand {#expand}
+
+重新签发证书注意事项
+
++ 任务完成后container未清理，可执行`docker-compose down`
++ wait-for-dhparam仅判断dhparam.pem是否存在，重新签发前删除dhparam-certs_dhparam卷
+
+也可以保留dhparam-certs_dhparam卷，dhparam.pem依然会更新，但是注意查看dhparam容器是否执行完成，因为certs不再等待dhparam容器完成
+
 + [certbot - docker hub](https://hub.docker.com/u/certbot "certbot")
 + [Certbot User Guide](https://certbot.eff.org/docs/using.html "Certbot User Guide")
 + [Alpine Linux:Mirrors](https://wiki.alpinelinux.org/wiki/Alpine_Linux:Mirrors "Alpine Linux:Mirrors")
