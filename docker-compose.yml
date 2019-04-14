@@ -35,8 +35,10 @@ services:
       - dhparam
     command: ["certonly", "--standalone",
       "-d", "zp25.ninja",
-      "-d", "www.zp25.ninja",
-      "-d", "home.zp25.ninja"
+      "-d", "api.zp25.ninja",
+      "-d", "dev.zp25.ninja",
+      "-d", "home.zp25.ninja",
+      "-d", "www.zp25.ninja"
     ]
 
 volumes:
