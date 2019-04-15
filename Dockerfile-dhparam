@@ -9,5 +9,5 @@ RUN echo -e "${APK_MIRROR}v3.9/main\n${APK_MIRROR}v3.9/community\n" > /etc/apk/r
     && apk update \
     && apk add --no-cache openssl
 
-CMD openssl dhparam -out ./dhparam.tmp.pem 2048 \
+CMD openssl dhparam -out ./dhparam.tmp.pem 4096 \
   && mv -f ./dhparam.tmp.pem ./dhparam.pem
