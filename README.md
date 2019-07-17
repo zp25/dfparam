@@ -8,8 +8,6 @@ docker-compose run --name certs --service-ports certbot
 docker-compose run --name certs --service-ports certbot \
     certonly --standalone \
     -d zp25.ninja \
-    -d api.zp25.ninja \
-    -d dev.zp25.ninja \
     -d home.zp25.ninja \
     -d www.zp25.ninja
 
