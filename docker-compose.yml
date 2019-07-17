@@ -14,7 +14,7 @@ services:
   certbot:
     build:
       context: .
-      dockerfile: Dockerfile-certs
+      dockerfile: Dockerfile
     image: certs
     container_name: certs
     ports:
