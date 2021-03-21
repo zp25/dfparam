@@ -1,11 +1,11 @@
-FROM alpine:3.10
+FROM alpine:3.13
 
 VOLUME /etc/ssl/certs
 WORKDIR /etc/ssl/certs
 
 ENV APK_MIRROR="https://mirrors.tuna.tsinghua.edu.cn/alpine"
 
-RUN echo -e "${APK_MIRROR}/v3.10/main\n${APK_MIRROR}/v3.10/community\n" > /etc/apk/repositories \
+RUN echo -e "${APK_MIRROR}/v3.13/main\n${APK_MIRROR}/v3.13/community\n" > /etc/apk/repositories \
     && apk update \
     && apk add --no-cache openssl
 
